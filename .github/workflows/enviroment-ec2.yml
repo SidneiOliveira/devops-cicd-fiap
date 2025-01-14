@@ -2,7 +2,6 @@ name: Continuous Delivery
 
 on:
   workflow_call:
-
 jobs:
     EC2:
       runs-on: ubuntu-latest
