@@ -12,6 +12,16 @@ jobs:
         
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3.0.0
+            
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          LOCAL_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: /home/${{ secrets.REMOTE_USER }}
+          EXCLUDE: "/dist/, /node_modules/, /*"
       - name: exec remote ssh commands
         uses: appleboy/ssh-action@master
         with:
@@ -27,14 +37,4 @@ jobs:
             export DBPORT=${{ secrets.DB_PORT }}
             export PORT=8000
             chmod +x main
-            nohup ./main > nohup.out 2> nohup.err < & dev/null &
-            
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          LOCAL_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: /home/${{ secrets.REMOTE_USER }}
-          EXCLUDE: "/dist/, /node_modules/, /*"
+            nohup ./main > nohup.out 2> nohup.err < & dev/null & cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
