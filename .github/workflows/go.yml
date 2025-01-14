@@ -12,8 +12,8 @@ jobs:
     env:
       HOST: localhost
       DBPORT: 5432
-      USER: root
-      PASSWORD: root
+      USER: cicdgrupo34cld
+      PASSWORD: cicdgrupo34cld
       DBNAME: root
     strategy:
       matrix:
@@ -34,8 +34,7 @@ jobs:
       run: docker-compose up -d
 
     - name: Test
-      run: go test -v main_test.go 
-      
+      run: go test -v main_test.go
   
   build:
     runs-on: ubuntu-latest
