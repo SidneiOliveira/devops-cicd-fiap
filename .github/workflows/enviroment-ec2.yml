@@ -19,3 +19,16 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: /home/${{ secrets.REMOTE_USER }}
           EXCLUDE: "/dist/, /node_modules/, /*"
+      - name: exec remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            export HOST=${{ secrets.DB_HOST }}
+            export USER=${{ secrets.DB_USER }}
+            export PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DBNAME=${{ secrets.DBNAME }}
+            export PORT=${{ secrets.PORT }}
