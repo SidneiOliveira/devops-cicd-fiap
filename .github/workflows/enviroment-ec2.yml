@@ -23,7 +23,7 @@ jobs:
           TARGET: /home/${{ secrets.REMOTE_USER }}
           EXCLUDE: "/dist/, /node_modules/, /*"
           
-      - name: exec remote ssh commands
+      - name: Exec remote ssh commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
@@ -38,4 +38,4 @@ jobs:
             export DBPORT=${{ secrets.DB_PORT }}
             export PORT=8000
             chmod +x main
-            nohup ./main > nohup.out 2> nohup.err < & dev/null
+            nohup ./main
