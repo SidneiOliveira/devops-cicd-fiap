@@ -30,10 +30,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            sudo su -
-            yum update -y
-            yum install -y httpd
-            systemctl status httpd
             mkdir temp
             cd temp
             wget https://www.free-css.com/assets/files/free-css-templates/download/page269/complex.zip
