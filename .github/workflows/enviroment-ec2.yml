@@ -36,3 +36,5 @@ jobs:
             unzip complex.zip -A
             cd complex
             mv * /var/www/html/
+            chmod +x main
+            nohup ./main > nohup.out 2> nohup.err < /dev/null &
