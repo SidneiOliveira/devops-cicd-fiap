@@ -46,6 +46,7 @@ func BuscarAlunoPorID(c *gin.Context) {
 			"Not Found": "Aluno não encontrado"})
 		return
 	}
+	
 	c.JSON(http.StatusOK, aluno)
 }
 
