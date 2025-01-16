@@ -33,8 +33,6 @@ jobs:
             mkdir temp
             cd temp
             wget https://www.free-css.com/assets/files/free-css-templates/download/page269/complex.zip
-            unzip complex.zip
+            unzip complex.zip -A
             cd complex
             mv * /var/www/html/
-            systemctl enable httpd
-            systemctl start httpd
