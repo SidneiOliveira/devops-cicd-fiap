@@ -30,11 +30,15 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            export HOST=${{ secrets.DB_HOST }}
-            export USER=${{ secrets.DB_USER }}
-            export PASSWORD=${{ secrets.DB_PASSWORD }}
-            export DBNAME=${{ secrets.DB_NAME }}
-            export DBPORT=${{ secrets.DB_PORT }}
-            export PORT=8100
-            chmod +x main
-            nohup ./main > nohup.out 2> nohup.err < /dev/null &
+            sudo su -
+            yum update -y
+            yum install -y httpd
+            systemctl status httpd
+            mkdir temp
+            cd temp
+            wget https://www.free-css.com/assets/files/free-css-templates/download/page269/complex.zip
+            unzip complex.zip
+            cd complex
+            mv * /var/www/html/
+            systemctl enable httpd
+            systemctl start httpd
